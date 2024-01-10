@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {Sum} from "./sum";
+import {Rate} from "./rate";
+import {Term} from "./term";
+
+
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    return (
+    <div>
+        <div>
+            <div>
+                <Sum/>
+            </div>
+            <div>
+                <Rate/>
+            </div>
+            <div>
+                <Term/>
+            </div>
+        </div>
+            <button onClick="Total()">Calc</button>
     </div>
   );
 }
