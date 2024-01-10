@@ -2,6 +2,7 @@ import React from "react";
 import {Sum} from "./sum";
 import {Rate} from "./rate";
 import {Term} from "./term";
+import TotalTable from "./table";
 
 
 
@@ -19,8 +20,10 @@ function App() {
             <div>
                 <Term/>
             </div>
+            <div>
+                <TotalTable/>
+            </div>
         </div>
-            <button onClick="Total()">Calc</button>
     </div>
   );
 }
