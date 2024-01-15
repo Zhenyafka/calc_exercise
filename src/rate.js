@@ -1,9 +1,13 @@
+import React from "react";
+
 export const Rate = () => {
     return (
         <div>
             <label>
-                Interest rate:
-                <input id="rate" type="number" required placeholder="Enter interest rate" />
+                <input id="total-rate" type="number"
+                       min="0" max="100"
+                       required placeholder="Enter interest rate"
+                       className="inputRate"/>
             </label>
         </div>
     )
