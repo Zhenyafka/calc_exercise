@@ -1,13 +1,19 @@
-import React from "react";
+import {FC} from "react";
 
-export const Sum = () => {
+interface SumProps {
+    creditAmount,
+    setCreditAmount
+}
+
+export const Sum: FC<SumProps> = ({creditAmount, setCreditAmount}) => {
     return (
         <div>
             <label>
                 <input id="credit-sum" type="number"
                        min="0" max="10000000"
                        required placeholder="Enter the credit amount"
-                       className="inputSum"/>
+                       className="inputSum"
+                       onChange={setCreditAmount}/>
             </label>
         </div>
     )
