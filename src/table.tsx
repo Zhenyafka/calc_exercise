@@ -1,5 +1,5 @@
-
 import * as React from 'react';
+import {FC} from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,16 +7,13 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import {Row} from "./App";
 
-function createData(date, payment) {
-    return { date, payment };
+export interface BasicTableProps {
+    rows: Row[]
 }
 
-const rows = [
-    createData('23/12/1990', 23000)
-];
-
-export function BasicTable() {
+export const BasicTable: FC<BasicTableProps> = ({rows}) => {
     return (
         <TableContainer component={Paper}>
             <Table>
@@ -29,12 +26,11 @@ export function BasicTable() {
                 <TableBody>
                     {rows.map((row) => (
                         <TableRow
-                            key={row.name}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            // key={row.name}
+                            sx={{'&:last-child td, &:last-child th': {border: 0}}}
                         >
-
-                            <TableCell>{row.date}</TableCell>
-                            <TableCell>{row.payment}</TableCell>
+                            <TableCell>{row.dateOfPayment}</TableCell>
+                            <TableCell>{row.oneTimePayment}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
