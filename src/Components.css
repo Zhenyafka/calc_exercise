@@ -18,21 +18,39 @@
 
 .sumBlock{
     position: fixed;
-    margin-left: 450px;
-    margin-top: 128px;
+    margin-left: 200px;
+    margin-top: 150px;
 }
 
 .rateBlock{
     position: fixed;
-    margin-left: 450px;
-    margin-top: 278px;
+    margin-left: 200px;
+    margin-top: 300px;
 }
 
 .termBlock{
     position: fixed;
-    margin-left: 450px;
-    margin-top: 428px;
+    margin-left: 800px;
+    margin-top: 150px;
 }
+
+.dateBlock{
+    position: fixed;
+    margin-left: 800px;
+    margin-top: 300px;
+}
+.buttonBlock{
+    position: fixed;
+    margin-left: 450px;
+    margin-top: 600px;
+}
+
+.tableBlock{
+    position: fixed;
+    margin-top: 700px;
+    width: inherit;
+}
+
 
 .inputSum {
     position: relative;
@@ -70,10 +88,8 @@
     font-size: 22px;
 }
 
+
 .paymentsButton{
-    position: fixed;
-    margin-left: 475px;
-    margin-top: 578px;
     height: 80px;
     width: 255px;
     background-color: #1CDEEA;
@@ -85,3 +101,6 @@
     font-weight: bold;
     color: white;
 }
+
+
+
