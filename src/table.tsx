@@ -11,10 +11,12 @@ import {Row} from "./App";
 
 export interface BasicTableProps {
     rows: Row[]
+    isHiddenTable: boolean
 }
 
-export const BasicTable: FC<BasicTableProps> = ({rows}) => {
+export const BasicTable: FC<BasicTableProps> = ({rows,isHiddenTable}) => {
     return (
+        isHiddenTable ? <div/> :
         <TableContainer component={Paper}>
             <Table>
                 <TableHead>
@@ -26,10 +28,10 @@ export const BasicTable: FC<BasicTableProps> = ({rows}) => {
                 <TableBody>
                     {rows.map((row) => (
                         <TableRow
-                            // key={row.name}
+                            key={row.id}
                             sx={{'&:last-child td, &:last-child th': {border: 0}}}
                         >
-                            <TableCell>{row.dateOfPayment}</TableCell>
+                            <TableCell>{row.dateOfPayment.toDateString()}</TableCell>
                             <TableCell>{row.oneTimePayment}</TableCell>
                         </TableRow>
                     ))}

@@ -4,7 +4,8 @@ import {TextField} from "@mui/material";
 import {BasicTable} from "./table.tsx";
 
 export interface Row {
-    dateOfPayment: string
+    id: number
+    dateOfPayment: Date
     oneTimePayment: number
 }
 
@@ -24,36 +25,44 @@ export const App = () => {
         const oneTimePayments = P * Math.pow(base, n) * (base - 1) / (Math.pow(base, n) - 1)
 
         const startDay = new Date()
-        const firstPaymentMonth: Date = new Date(startDay.setMonth(startDay.getMonth() + 1))
-        const paymentMonth = [firstPaymentMonth]
+        const result: Row[] = []
         for (let i = 0; i < numberOfMonth; i++) {
-
+            let nextPaymentMonth: Date = new Date(startDay.setMonth(startDay.getMonth() + 1));//RAZBERIS' 2
+            result.push({id: i, dateOfPayment: nextPaymentMonth, oneTimePayment: oneTimePayments} as Row)
         }
 
-        return []
+        return result
     }
 
     const calculateFormulaAndShowTable = () => {
+        if (!isHiddenTable) {
+            setIsHiddenTable(true)
+            return
+        }
         const payments: Row[] = calculatePayments(creditAmount, interestRate, numberOfMonth)
         setRows(payments)
         setIsHiddenTable(false)
     }
+
     return (
         <div className="backgroundOfPage">
             <div className="mainBlock">
                 <div className="sumBlock">
-                    <TextField onChange={event => setCreditAmount(+event.target.value)} value={creditAmount}/>
+                    <TextField onChange={event => setCreditAmount(+event.target.value)} value={creditAmount}
+                               label={'creditAmount'}/>
                 </div>
                 <div className="rateBlock">
-                    <TextField onChange={event => setInterestRate(+event.target.value)} value={interestRate}/>
+                    <TextField onChange={event => setInterestRate(+event.target.value)} value={interestRate}
+                               label={'interestRate'}/>
                 </div>
                 <div className="termBlock">
-                    <TextField onChange={event => setNumberOfMonth(+event.target.value)} value={numberOfMonth}/>
+                    <TextField onChange={event => setNumberOfMonth(+event.target.value)} value={numberOfMonth}
+                               label={'numberOfMonth'}/>
                 </div>
                 <button className="paymentsButton" onClick={calculateFormulaAndShowTable}>
                     Total
                 </button>
-                <BasicTable rows={rows}/>
+                <BasicTable rows={rows} isHiddenTable={isHiddenTable}/>
             </div>
         </div>
     );
