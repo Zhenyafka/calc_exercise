@@ -38,7 +38,10 @@ export const App = () => {
         return result
     }
 
+
     const calculateFormulaAndShowTable = () => {
+
+
         if (!isHiddenTable) {
             setIsHiddenTable(true)
             return
@@ -49,8 +52,11 @@ export const App = () => {
     }
 
     return (
-        <div className="backgroundOfPage">
-            <div className="mainBlock">
+        <div
+            className="backgroundOfPage">
+            <div className="mainBlock" onKeyDown={(e) => {
+                if (e.key === 'Enter') calculateFormulaAndShowTable()
+            }}>
                 <div className="sumBlock">
                     <TextField onChange={event => setCreditAmount(+event.target.value)} value={creditAmount}
                                label={'creditAmount'}/>
@@ -64,11 +70,11 @@ export const App = () => {
                                label={'numberOfMonth'}/>
                 </div>
                 <div className='dateBlock'>
-                        <DatePicker selected={date} onChange={(date) => setDate(date)}/>
+                    <DatePicker selected={date} onChange={(date) => setDate(date)}/>
                 </div>
                 <div className="buttonBlock">
-                    <button className="paymentsButton" onClick={calculateFormulaAndShowTable}>
-                    Total
+                    <button className="paymentsButton" onClick={calculateFormulaAndShowTable} >
+                        Total
                     </button>
                 </div>
                 <div className="tableBlock">
