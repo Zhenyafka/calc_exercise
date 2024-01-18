@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FC} from 'react';
-import { makeStyles } from '@material-ui/styles';
+import {makeStyles} from '@material-ui/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -37,39 +37,45 @@ const useStyles = makeStyles({
     },
 });
 
-export const BasicTable: FC<BasicTableProps> = ({rows,isHiddenTable}) => {
+function fixedFormat(num: number) {
+    return `${num.toFixed(2)}`;
+}
+
+export const BasicTable: FC<BasicTableProps> = ({rows, isHiddenTable}) => {
     const classes = useStyles();
     return (
         isHiddenTable ? <div/> :
-        <Paper className={classes.root}>
-            <TableContainer className={classes.container}>
-                <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
-                        <TableRow>
-                            {columns.map((column) => (
-                                <TableCell
-                                    key={column.id}
-                                    align={column.align}
-                                    style={{ minWidth: column.minWidth }}
-                                >
-                                    {column.label}
-                                </TableCell>
-                            ))}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows.map((row) => (
-                            <TableRow
-                                key={row.id}
-                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                            >
-                                <TableCell>{row.dateOfPayment.toDateString()}</TableCell>
-                                <TableCell>{row.oneTimePayment}</TableCell>
+            <Paper className={classes.root}>
+                <TableContainer className={classes.container}>
+                    <Table stickyHeader aria-label="sticky table">
+                        <TableHead>
+                            <TableRow>
+                                {columns.map((column) => (
+                                    <TableCell
+                                        key={column.id}
+                                        align={column.align}
+                                        style={{minWidth: column.minWidth}}>
+                                        {column.label}
+                                    </TableCell>
+                                ))}
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </Paper>
+                        </TableHead>
+                        <TableBody>
+                            {rows.map((row) => (
+                                <TableRow
+                                    key={row.id}
+                                    sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                                    <TableCell>{row.dateOfPayment.toDateString()}</TableCell>
+                                    <TableCell>{fixedFormat(row.oneTimePayment)}</TableCell>
+                                </TableRow>
+                            ))}
+                            <TableRow>
+                                <TableCell>Total </TableCell>
+                                <TableCell>{fixedFormat(rows.reduce((sum, currentRow) => sum + currentRow.oneTimePayment, 0))} </TableCell>
+                            </TableRow>
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Paper>
     );
 }
