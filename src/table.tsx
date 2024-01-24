@@ -16,7 +16,7 @@ export interface BasicTableProps {
 }
 
 interface Column {
-    id: 'paymentDate' | 'amountOfPayment';
+    id: 'paymentDate' | 'amountOfPayment' | 'mainPart' | 'percentagePart';
     label: string;
     minWidth?: number;
     align?: 'right';
@@ -26,6 +26,8 @@ interface Column {
 const columns: Column[] = [
     {id: 'paymentDate', label: 'Payment Date', minWidth: 170},
     {id: 'amountOfPayment', label: 'Amount of Payment', minWidth: 170},
+    {id: 'mainPart', label: 'Main Part', minWidth: 170},
+    {id: 'percentagePart', label: 'Percentage Part', minWidth: 170},
 ]
 
 const useStyles = makeStyles({
@@ -67,11 +69,15 @@ export const BasicTable: FC<BasicTableProps> = ({rows, isHiddenTable}) => {
                                     sx={{'&:last-child td, &:last-child th': {border: 0}}}>
                                     <TableCell>{row.dateOfPayment.toDateString()}</TableCell>
                                     <TableCell>{fixedFormat(row.oneTimePayment)}</TableCell>
+                                    <TableCell>{fixedFormat(row.mainOneTimePayment)}</TableCell>
+                                    <TableCell>{fixedFormat(row.percentageOneTimePayment)}</TableCell>
                                 </TableRow>
                             ))}
                             <TableRow>
                                 <TableCell>Total </TableCell>
                                 <TableCell>{fixedFormat(rows.reduce((sum, currentRow) => sum + currentRow.oneTimePayment, 0))} </TableCell>
+                                <TableCell>{fixedFormat(rows.reduce((sum, currentRow) => sum + currentRow.mainOneTimePayment, 0))} </TableCell>
+                                <TableCell>{fixedFormat(rows.reduce((sum, currentRow) => sum + currentRow.percentageOneTimePayment, 0))} </TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>

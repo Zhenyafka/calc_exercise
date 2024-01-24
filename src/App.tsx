@@ -11,6 +11,9 @@ export interface Row {
     id: number
     dateOfPayment: Date
     oneTimePayment: number
+    mainOneTimePayment: number
+    percentageOneTimePayment : number
+
 }
 
 
@@ -22,12 +25,14 @@ export const App = () => {
     const [rows, setRows] = useState([])
     const [date, setDate] = useState(new Date());
 
-    const calculatePayments = (creditAmount, interestRate, numberOfMonth) => {
+    const annuityPayments = (creditAmount, interestRate, numberOfMonth) => {
         const P = creditAmount
         const r = interestRate / 100.
         const n = numberOfMonth
         const base = Math.pow(1 + r, 1 / 12.)
         const oneTimePayments = P * Math.pow(base, n) * (base - 1) / (Math.pow(base, n) - 1)
+        const mainOneTimePayments = P/n
+        const percentageOneTimePayments = oneTimePayments - mainOneTimePayments
 
 
 
@@ -35,18 +40,30 @@ export const App = () => {
         const result: Row[] = []
         for (let i = 0; i < numberOfMonth; i++) {
             let nextPaymentMonth: Date = new Date(startDay.setMonth(startDay.getMonth() + 1));//RAZBERIS' 2
-            result.push({id: i, dateOfPayment: nextPaymentMonth, oneTimePayment: oneTimePayments} as Row)
+            result.push({id: i, dateOfPayment: nextPaymentMonth, oneTimePayment: oneTimePayments,
+                mainOneTimePayment:mainOneTimePayments, percentageOneTimePayment:percentageOneTimePayments} as Row)
         }
 
         return result
     }
 
-    const simplePayment = (creditAmount, interestRate, numberOfMonth) => {
-        const P = creditAmount
-        const r = interestRate / 100.
-        const n = numberOfMonth
-        const total = ()
-    }
+    // const simplePayments = (creditAmount, interestRate, numberOfMonth) => {
+    //     const P = creditAmount
+    //     const r = interestRate / 100.
+    //     const n = numberOfMonth
+    //     const total = (P*r)*n
+    //     const oneTimePayments = total/n
+    //
+    //     const startDay = new Date(date)
+    //     const result: Row[] = []
+    //     for (let i = 0; i < numberOfMonth; i++) {
+    //         let nextPaymentMonth: Date = new Date(startDay.setMonth(startDay.getMonth() + 1));//RAZBERIS' 2
+    //         result.push({id: i, dateOfPayment: nextPaymentMonth, oneTimePayment: oneTimePayments} as Row)
+    //     }
+    //
+    //     return result
+    // }
+
 
     // const calculatePaymentsDiff = (creditAmount, interestRate, numberOfMonth) => {
     //     const P = creditAmount
@@ -71,10 +88,14 @@ export const App = () => {
             setIsHiddenTable(true)
             return
         }
-        const payments: Row[] = calculatePayments(creditAmount, interestRate, numberOfMonth)
-        setRows(payments)
+
+        const annuity: Row[] = annuityPayments(creditAmount, interestRate, numberOfMonth)
+        setRows(annuity)
         setIsHiddenTable(false)
+
     }
+
+
 
     let x = document.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') calculateFormulaAndShowTable()
@@ -108,7 +129,8 @@ export const App = () => {
                 </div>
                 <div className="selectorBlock">
                     <select className="selectType">
-                        <option onChange={calculateFormulaAndShowTable}>Annuity payment</option>
+                        <option value={"annuity"}>Annuity payment</option>
+                        <option value={"simple"}>Simple payment</option>
                         <option value={"differentiated"}>Differentiated payment</option>
                     </select>
                 </div>
