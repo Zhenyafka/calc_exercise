@@ -39,6 +39,13 @@
     margin-left: 800px;
     margin-top: 300px;
 }
+
+.selectorBlock{
+    position: fixed;
+    margin-left: 800px;
+    margin-top: 400px;
+}
+
 .buttonBlock{
     position: fixed;
     margin-left: 450px;
@@ -50,7 +57,12 @@
     margin-top: 700px;
     width: inherit;
 }
-
+.slider{
+    position: fixed;
+    margin-left: -230px;
+    margin-top: 50px;
+    width: 230px;
+}
 
 .inputSum {
     position: relative;
@@ -100,6 +112,18 @@
     font-size: 24px;
     font-weight: bold;
     color: white;
+}
+
+.selectType {
+    position: relative;
+    height: 30px;
+    width: 250px;
+    background-color: #FDFFFF;
+    border: 0;
+    box-shadow: 0px 5px 5px grey;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 22px;
 }
 
 
