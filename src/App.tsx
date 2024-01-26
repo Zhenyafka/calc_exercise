@@ -1,20 +1,72 @@
-import {useState} from "react";
+import {React, useState} from "react";
 import "./Components.css"
-import {FormControl, InputLabel, MenuItem, TextField} from "@mui/material";
+import {FormControl, InputLabel, MenuItem, Select, TextField} from "@mui/material";
 import {BasicTable} from "./table.tsx";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
-import {React} from "react";
 
+export const annuityPayments = (creditAmount, interestRate, numberOfMonth, date) => {
+    const P = creditAmount
+    const r = interestRate / 100.
+    const n = numberOfMonth
+    const base = Math.pow(1 + r, 1 / 12.)
+    const oneTimePayments = P * Math.pow(base, n) * (base - 1) / (Math.pow(base, n) - 1)
+    const mainOneTimePayments = P / n
+    const percentageOneTimePayments = oneTimePayments - mainOneTimePayments
+
+    const startDay = new Date(date)
+    const result: Row[] = []
+    for (let i = 0; i < numberOfMonth; i++) {
+        let nextPaymentMonth: Date = new Date(startDay.setMonth(startDay.getMonth() + 1));//RAZBERIS' 2
+        result.push({
+            id: i, dateOfPayment: nextPaymentMonth, oneTimePayment: oneTimePayments,
+            mainOneTimePayment: mainOneTimePayments, percentageOneTimePayment: percentageOneTimePayments
+        } as Row)
+    }
+
+    return result
+}
+
+export const simplePayments = (creditAmount, interestRate, numberOfMonth, date) => {
+    const P = creditAmount
+    const r = interestRate / 100.
+    const n = numberOfMonth
+    const total = (P * r) * n
+    const oneTimePayments = total / n
+    const mainOneTimePayments = P / n
+    const percentageOneTimePayments = oneTimePayments - mainOneTimePayments
+
+    const startDay = new Date(date)
+    const result: Row[] = []
+    for (let i = 0; i < numberOfMonth; i++) {
+        let nextPaymentMonth: Date = new Date(startDay.setMonth(startDay.getMonth() + 1));//RAZBERIS' 2
+        result.push({
+            id: i, dateOfPayment: nextPaymentMonth, oneTimePayment: oneTimePayments,
+            mainOneTimePayment: mainOneTimePayments, percentageOneTimePayment: percentageOneTimePayments
+        } as Row)
+    }
+
+    return result
+}
 
 export interface Row {
     id: number
     dateOfPayment: Date
     oneTimePayment: number
     mainOneTimePayment: number
-    percentageOneTimePayment : number
+    percentageOneTimePayment: number
 
 }
+
+export interface SelectedFunction {
+    label: string
+    method
+}
+
+export const listOfSelectedFunction: SelectedFunction[] = [
+    {method: annuityPayments, label: "annuity"},
+    {label: "simple", method: simplePayments}
+]
 
 
 export const App = () => {
@@ -24,77 +76,18 @@ export const App = () => {
     const [isHiddenTable, setIsHiddenTable] = useState(true)
     const [rows, setRows] = useState([])
     const [date, setDate] = useState(new Date());
+    const [selectedFunctionForCreditCalculation, setSelectedFunctionForCreditCalculation] = useState(listOfSelectedFunction[0])
 
-    const annuityPayments = (creditAmount, interestRate, numberOfMonth) => {
-        const P = creditAmount
-        const r = interestRate / 100.
-        const n = numberOfMonth
-        const base = Math.pow(1 + r, 1 / 12.)
-        const oneTimePayments = P * Math.pow(base, n) * (base - 1) / (Math.pow(base, n) - 1)
-        const mainOneTimePayments = P/n
-        const percentageOneTimePayments = oneTimePayments - mainOneTimePayments
-
-
-
-        const startDay = new Date(date)
-        const result: Row[] = []
-        for (let i = 0; i < numberOfMonth; i++) {
-            let nextPaymentMonth: Date = new Date(startDay.setMonth(startDay.getMonth() + 1));//RAZBERIS' 2
-            result.push({id: i, dateOfPayment: nextPaymentMonth, oneTimePayment: oneTimePayments,
-                mainOneTimePayment:mainOneTimePayments, percentageOneTimePayment:percentageOneTimePayments} as Row)
-        }
-
-        return result
-    }
-
-    // const simplePayments = (creditAmount, interestRate, numberOfMonth) => {
-    //     const P = creditAmount
-    //     const r = interestRate / 100.
-    //     const n = numberOfMonth
-    //     const total = (P*r)*n
-    //     const oneTimePayments = total/n
-    //
-    //     const startDay = new Date(date)
-    //     const result: Row[] = []
-    //     for (let i = 0; i < numberOfMonth; i++) {
-    //         let nextPaymentMonth: Date = new Date(startDay.setMonth(startDay.getMonth() + 1));//RAZBERIS' 2
-    //         result.push({id: i, dateOfPayment: nextPaymentMonth, oneTimePayment: oneTimePayments} as Row)
-    //     }
-    //
-    //     return result
-    // }
-
-
-    // const calculatePaymentsDiff = (creditAmount, interestRate, numberOfMonth) => {
-    //     const P = creditAmount
-    //     const r = interestRate / 100.
-    //     const n = numberOfMonth
-    //     const diffPayment = P / n + P * r
-    //     const BalanceOwed = P - diffPayment
-    //     const newPayment = new BalanceOwed
-    //
-    //     const startDay = new Date(date)
-    //     const result: Row[] = []
-    //     for (let i = 0; i < numberOfMonth; i++) {
-    //         let nextPaymentMonth: Date = new Date(startDay.setMonth(startDay.getMonth() + 1));//RAZBERIS' 2
-    //         result.push({id: i, dateOfPayment: nextPaymentMonth, oneTimePayment: oneTimePayments} as Row)
-    //     }
-    // }
 
     const calculateFormulaAndShowTable = () => {
-
-
         if (!isHiddenTable) {
             setIsHiddenTable(true)
             return
         }
 
-        const annuity: Row[] = annuityPayments(creditAmount, interestRate, numberOfMonth)
-        setRows(annuity)
+        setRows(selectedFunctionForCreditCalculation.method(creditAmount, interestRate, numberOfMonth, date))
         setIsHiddenTable(false)
-
     }
-
 
 
     let x = document.addEventListener('keydown', function (e) {
@@ -128,11 +121,22 @@ export const App = () => {
                     <DatePicker selected={date} onChange={(date) => setDate(date)}/>
                 </div>
                 <div className="selectorBlock">
-                    <select className="selectType">
-                        <option value={"annuity"}>Annuity payment</option>
-                        <option value={"simple"}>Simple payment</option>
-                        <option value={"differentiated"}>Differentiated payment</option>
-                    </select>
+                    <FormControl variant="standard" sx={{m: 1, minWidth: 150}}>
+                        <InputLabel id="demo-simple-select-standard-label">Type of Calculation</InputLabel>
+                        <Select
+                            value={selectedFunctionForCreditCalculation}
+                            onChange={(e) => {
+                                setSelectedFunctionForCreditCalculation(e.target.value)
+                            }}
+                            labelId="demo-simple-select-standard-label"
+                            id="demo-simple-select-standard"
+                            label="Type of Calculation">
+                            {listOfSelectedFunction.map((row) => (
+                                <MenuItem key={row.label} value={row}>{row.label}  </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+
                 </div>
                 <div className="buttonBlock">
                     <button className="paymentsButton" onClick={calculateFormulaAndShowTable}
