@@ -13,11 +13,11 @@ export const annuityPayments = (creditAmount, interestRate, numberOfMonth, date)
     const oneTimePayments = P * Math.pow(base, n) * (base - 1) / (Math.pow(base, n) - 1)
     const mainOneTimePayments = P / n
     const percentageOneTimePayments = oneTimePayments - mainOneTimePayments
-
     const startDay = new Date(date)
+
     const result: Row[] = []
     for (let i = 0; i < numberOfMonth; i++) {
-        let nextPaymentMonth: Date = new Date(startDay.setMonth(startDay.getMonth() + 1));//RAZBERIS' 2
+        let nextPaymentMonth: Date = new Date(startDay.setMonth(startDay.getMonth() + 1));
         result.push({
             id: i, dateOfPayment: nextPaymentMonth, oneTimePayment: oneTimePayments,
             mainOneTimePayment: mainOneTimePayments, percentageOneTimePayment: percentageOneTimePayments
@@ -31,15 +31,14 @@ export const simplePayments = (creditAmount, interestRate, numberOfMonth, date) 
     const P = creditAmount
     const r = interestRate / 100.
     const n = numberOfMonth
-    const total = (P * r) * n
-    const oneTimePayments = total / n
+    const oneTimePayments = P * r
     const mainOneTimePayments = P / n
     const percentageOneTimePayments = oneTimePayments - mainOneTimePayments
-
     const startDay = new Date(date)
+
     const result: Row[] = []
     for (let i = 0; i < numberOfMonth; i++) {
-        let nextPaymentMonth: Date = new Date(startDay.setMonth(startDay.getMonth() + 1));//RAZBERIS' 2
+        let nextPaymentMonth: Date = new Date(startDay.setMonth(startDay.getMonth() + 1));
         result.push({
             id: i, dateOfPayment: nextPaymentMonth, oneTimePayment: oneTimePayments,
             mainOneTimePayment: mainOneTimePayments, percentageOneTimePayment: percentageOneTimePayments
@@ -48,6 +47,41 @@ export const simplePayments = (creditAmount, interestRate, numberOfMonth, date) 
 
     return result
 }
+
+const differentialPayments = (creditAmount, interestRate, numberOfMonth, date) => {
+    const P = creditAmount
+    const r = interestRate / 100.
+    const n = numberOfMonth
+    const startDay = new Date(date)
+    let oneTimePayments = 0
+    let balanceOwed = P
+    let mainOneTimePayments
+    let percentageOneTimePayments
+
+    const result: Row[] = []
+
+    for (let i = 0; i < numberOfMonth; i++) {
+        let nextPaymentMonth: Date = new Date(startDay.setMonth(startDay.getMonth() + 1));
+        balanceOwed = balanceOwed - oneTimePayments
+        oneTimePayments = (balanceOwed-oneTimePayments)/numberOfMonth + (balanceOwed-oneTimePayments)*interestRate/100
+        mainOneTimePayments = oneTimePayments - ((balanceOwed-oneTimePayments)*interestRate/100 - (balanceOwed-oneTimePayments)/numberOfMonth)
+        percentageOneTimePayments = (balanceOwed-oneTimePayments)*interestRate/100 - (balanceOwed-oneTimePayments)/numberOfMonth
+        result.push({
+            id: i, dateOfPayment: nextPaymentMonth, oneTimePayment: oneTimePayments,
+            mainOneTimePayment: mainOneTimePayments, percentageOneTimePayment: percentageOneTimePayments
+        } as Row)
+    }
+
+
+
+
+    return result
+}
+
+const calculateOneTimePaymentForDifferentialPay = (lastTimePayment: number, balanceOwed:number, numberOfMonth:number, interestRate:number)=>{
+    return (balanceOwed-lastTimePayment)/numberOfMonth + (balanceOwed-lastTimePayment)*interestRate
+}
+
 
 export interface Row {
     id: number
@@ -64,8 +98,9 @@ export interface SelectedFunction {
 }
 
 export const listOfSelectedFunction: SelectedFunction[] = [
-    {method: annuityPayments, label: "annuity"},
-    {label: "simple", method: simplePayments}
+    {label: "Annuity Payments", method: annuityPayments},
+    {label: "Simple Payments", method: simplePayments},
+    {label: "Differential Payments", method: differentialPayments}
 ]
 
 
