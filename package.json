@@ -2,6 +2,10 @@
   "name": "calc_exercize",
   "version": "0.1.0",
   "private": true,
+  "esModuleInterop": true,
+  "compilerOptions": {
+    "jsx": "preserve"
+  },
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
@@ -9,7 +13,6 @@
     "@mui/material": "^5.15.4",
     "@mui/x-data-grid": "^6.18.7",
     "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "react": "^18.2.0",
     "react-datepicker": "^4.25.0",
@@ -21,7 +24,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest --watch",
+    "coverage": "npx jest --watchAll=false --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -43,8 +47,13 @@
     ]
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.23.3",
+    "@testing-library/react": "^14.2.0",
+    "@types/jest": "^29.5.11",
     "@types/react-datepicker": "^4.19.5",
     "@typescript-eslint/parser": "^6.19.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
     "typescript": "^5.3.3"
   }
 }
