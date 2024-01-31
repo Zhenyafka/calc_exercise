@@ -56,6 +56,7 @@ export const differentialPayments = (creditAmount, interestRate, numberOfMonth, 
     const term = numberOfMonth
     const startDay = new Date(date)
     let oneTimePayments = 0
+    let oneTimeDiffPayment = 0
     let balanceOwed = creditSum
     let mainOneTimePayments
     let percentageOneTimePayments
@@ -63,10 +64,11 @@ export const differentialPayments = (creditAmount, interestRate, numberOfMonth, 
     const result: Row[] = []
     for (let i = 0; i < numberOfMonth; i++) {
         let nextPaymentMonth: Date = new Date(startDay.setMonth(startDay.getMonth() + 1));
+        oneTimeDiffPayment = creditSum / term
         balanceOwed = balanceOwed - oneTimePayments
-        oneTimePayments = (balanceOwed - oneTimePayments) / term + (balanceOwed - oneTimePayments) * percent / 12
-        mainOneTimePayments = (balanceOwed - oneTimePayments) / term
-        percentageOneTimePayments = oneTimePayments - mainOneTimePayments
+        oneTimePayments = oneTimeDiffPayment + balanceOwed * percent / 12
+        mainOneTimePayments = oneTimeDiffPayment
+        percentageOneTimePayments = balanceOwed * percent / 12
         result.push({
             id: i, dateOfPayment: nextPaymentMonth, oneTimePayment: oneTimePayments,
             mainOneTimePayment: mainOneTimePayments, percentageOneTimePayment: percentageOneTimePayments
