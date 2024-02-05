@@ -83,6 +83,3 @@ export const differentialPayments = (creditAmount, interestRate, numberOfMonth, 
 }
 
 
-
-
-

@@ -4,8 +4,8 @@ import {FormControl, InputLabel, MenuItem, Select, TextField} from "@mui/materia
 import {BasicTable} from "./table.tsx";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
-import {annuityPayments, simplePayments, differentialPayments} from "./formulas.tsx"
-
+import {annuityPayments, simplePayments, differentialPayments} from "./formulas.tsx";
+import {dataRecord} from "./data_record.tsx";
 
 
 export interface SelectedFunction {
@@ -19,6 +19,8 @@ export const listOfSelectedFunction: SelectedFunction[] = [
     {label: "Differential Payments", method: differentialPayments}
 ]
 
+
+
 const App = () => {
     const [creditAmount, setCreditAmount] = useState(0.);
     const [interestRate, setInterestRate] = useState(0);
@@ -29,6 +31,7 @@ const App = () => {
     const [selectedFunctionForCreditCalculation, setSelectedFunctionForCreditCalculation] = useState(listOfSelectedFunction[0])
 
 
+
     const calculateFormulaAndShowTable = () => {
         if (!isHiddenTable) {
             setIsHiddenTable(true)
@@ -37,6 +40,7 @@ const App = () => {
 
         setRows(selectedFunctionForCreditCalculation.method(creditAmount, interestRate, numberOfMonth, date))
         setIsHiddenTable(false)
+        dataRecord(creditAmount, interestRate, numberOfMonth, date)
     }
 
 
