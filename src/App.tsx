@@ -6,6 +6,8 @@ import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import {annuityPayments, simplePayments, differentialPayments} from "./formulas.tsx";
 import {dataRecord} from "./data_record.tsx";
+import {Modal} from "./modal_window.tsx";
+
 
 
 export interface SelectedFunction {
@@ -29,6 +31,9 @@ const App = () => {
     const [rows, setRows] = useState([])
     const [date, setDate] = useState(new Date());
     const [selectedFunctionForCreditCalculation, setSelectedFunctionForCreditCalculation] = useState(listOfSelectedFunction[0])
+    const [modalActive, setModalActive] = useState(false)
+
+
 
 
 
@@ -41,6 +46,7 @@ const App = () => {
         setRows(selectedFunctionForCreditCalculation.method(creditAmount, interestRate, numberOfMonth, date))
         setIsHiddenTable(false)
         dataRecord(creditAmount, interestRate, numberOfMonth, date)
+        setModalActive(true)
     }
 
 
@@ -99,6 +105,9 @@ const App = () => {
                             }}>
                         Total
                     </button>
+                </div>
+                <div className= "modalBlock">
+                    <Modal active={modalActive} setActive={setModalActive}/>
                 </div>
                 <div className="tableBlock">
                     <BasicTable rows={rows} isHiddenTable={isHiddenTable}/>
