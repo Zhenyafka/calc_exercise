@@ -17,58 +17,58 @@
 }
 
 .sumBlock{
-    position: fixed;
-    margin-left: 200px;
-    margin-top: 150px;
+    position: relative;
+    left: 200px;
+    top: 150px;
 }
 
 .rateBlock{
-    position: fixed;
+    position: static;
     margin-left: 200px;
     margin-top: 300px;
 }
 
 .termBlock{
-    position: fixed;
-    margin-left: 800px;
-    margin-top: 150px;
+    position: relative;
+    margin-left: 750px;
+    top: -295px;
 }
 
 .dateBlock{
-    position: fixed;
-    margin-left: 800px;
-    margin-top: 300px;
+    position: static;
+    margin-left: 750px;
+    margin-top: -240px;
 }
 
 .selectorBlock{
-    position: fixed;
-    margin-left: 800px;
-    margin-top: 400px;
+    position: relative;
+    margin-left: 750px;
+    margin-top: 60px;
 }
 
 .buttonBlock{
-    position: fixed;
+    position: static;
     margin-left: 450px;
-    margin-top: 600px;
+    margin-top: 200px;
 }
 
 .tableBlock{
-    position: fixed;
-    margin-top: 700px;
+    position: static;
+    margin-top: 650px;
     width: inherit;
 }
 
 .modalBlock{
-    position: fixed;
-    margin-left: 360px;
-    margin-top: 400px;
+    position: static;
+    margin-left: 980px;
+    margin-top: -700px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .slider{
-    position: fixed;
+    position: static;
     margin-left: -230px;
     margin-top: 50px;
     width: 230px;
@@ -124,40 +124,3 @@
     color: white;
 }
 
-.modal{
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(0, 0, 0, 0.4);
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform: scale(0);
-}
-
-.modal-active{
-    opacity: 1;
-    pointer-events: all;
-}
-
-.modal-content{
-    padding: 20px;
-    border-radius: 12px;
-    background-color: white;
-    height: 70px;
-    width: 400px;
-    pointer-events: none;
-    font-family: "Times New Roman", Times, serif;
-    text-align: center;
-    font-size: 26px;
-}
-
-.modal-button{
-    position: fixed;
-    margin-left: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}

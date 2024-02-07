@@ -6,7 +6,7 @@ import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import {annuityPayments, simplePayments, differentialPayments} from "./formulas.tsx";
 import {dataRecord} from "./data_record.tsx";
-import {Modal} from "./modal_window.tsx";
+import {Modal} from "./Components/modal_window.tsx";
 
 
 
@@ -47,6 +47,7 @@ const App = () => {
         setIsHiddenTable(false)
         dataRecord(creditAmount, interestRate, numberOfMonth, date)
         setModalActive(true)
+        setTimeout(()=> {setModalActive(false)}, 5000)
     }
 
 
@@ -96,7 +97,6 @@ const App = () => {
                             ))}
                         </Select>
                     </FormControl>
-
                 </div>
                 <div className="buttonBlock">
                     <button className="paymentsButton" onClick={calculateFormulaAndShowTable}
