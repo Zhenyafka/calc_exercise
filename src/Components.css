@@ -6,6 +6,17 @@
     width: 1440px;
     background-image: linear-gradient(#1CDEEA, #000000);
 }
+
+.navbarBlock{
+    position: static;
+    margin-left: auto;
+    margin-right: auto;
+    height: 111px;
+    width: 1440px;
+    background-color: #16d7ea;
+
+}
+
 .mainBlock{
     position: static;
     margin-left: auto;
@@ -66,6 +77,8 @@
     align-items: center;
     justify-content: center;
 }
+
+
 
 .slider{
     position: static;

@@ -98,9 +98,6 @@ export const MainPage = () => {
                     <BasicTable rows={rows} isHiddenTable={isHiddenTable}/>
                 </div>
             </div>
-            <div className="mainBlock">
-                qwe
-            </div>
         </div>
     );
 }
