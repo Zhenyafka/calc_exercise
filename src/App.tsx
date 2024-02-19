@@ -1,10 +1,10 @@
 import {React} from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./Components.css";
-import {Navbar} from "./navbar.tsx";
-import {MainPage} from "./first_tab.tsx";
-import {StoragePage} from "./second_tab.tsx";
-import {ContentPage} from "./third_tab.tsx";
+import {Navbar} from "./tabs/navbar.tsx";
+import {MainPage} from "./tabs/first_tab.tsx";
+import {StoragePage} from "./tabs/second_tab.tsx";
+import {ContentPage} from "./tabs/third_tab.tsx";
 
 
 const App = () => {

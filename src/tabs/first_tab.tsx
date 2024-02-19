@@ -1,12 +1,12 @@
 import {React, useState} from "react";
-import "./Components.css"
+import "../Components.css"
 import {FormControl, InputLabel, MenuItem, Select, TextField} from "@mui/material";
-import {BasicTable} from "./table.tsx";
+import {BasicTable} from "../table.tsx";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
-import {listOfSelectedFunction} from "./formulas.tsx";
-import {dataRecord} from "./data_record.tsx";
-import {Modal} from "./components/modal_window.tsx";
+import {listOfSelectedFunction} from "../formulas.tsx";
+import {dataRecord} from "../data_record.tsx";
+import {Modal} from "../components/modal_window.tsx";
 
 export const MainPage = () => {
     const [creditAmount, setCreditAmount] = useState(0.);
