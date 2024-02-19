@@ -8,7 +8,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import {Row} from "./App.tsx";
+import {Row} from "./first_tab.tsx";
 
 export interface BasicTableProps {
     rows: Row[]

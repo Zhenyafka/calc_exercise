@@ -26,6 +26,7 @@ export const annuityPayments = (creditAmount, interestRate, numberOfMonth, date)
         } as Row)
     }
 
+
     return result
 }
 
