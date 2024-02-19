@@ -1,4 +1,4 @@
-export interface RowForData {
+export interface Row {
     id: number
     creditSum: number
     percent: number
@@ -6,17 +6,20 @@ export interface RowForData {
     currentDate: Date
 }
 
-export const dataResult: RowForData[] = []
+export const dataResult: Row[] = []
 
 export const dataRecord = (creditAmount: number, interestRate: number, numberOfMonth: number, date: Date) => {
-    const record: RowForData = {
+    const record: Row = {
         id: dataResult.length + 1,
         creditSum: creditAmount,
         percent: interestRate,
         term: numberOfMonth,
         currentDate: date
     }
-    dataResult.push(record)
-    console.log(dataResult)
+    dataResult.push({
+        id: dataResult.length + 1, creditSum: creditAmount, percent: interestRate,
+        term: numberOfMonth, currentDate: date
+    } as Row)
     return dataResult
+
 }
