@@ -9,6 +9,7 @@ export interface Row {
 export const dataResult: Row[] = []
 
 export const dataRecord = (creditAmount: number, interestRate: number, numberOfMonth: number, date: Date) => {
+// eslint-disable-next-line
     const record: Row = {
         id: dataResult.length + 1,
         creditSum: creditAmount,
