@@ -7,6 +7,7 @@ export function Navbar() {
         <nav className="navbarBlock">
             <NavLink to="/mainPage">Main Page</NavLink>
             <NavLink to="/storagePage">Storage Page</NavLink>
+            <NavLink to="/contentPage">Content Page</NavLink>
         </nav>
     );
 }

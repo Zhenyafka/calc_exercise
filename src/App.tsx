@@ -1,9 +1,10 @@
 import {React, useState} from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./Components.css"
+import "./Components.css";
+import {Navbar} from "./navbar.tsx";
 import {MainPage} from "./first_tab.tsx";
 import {StoragePage} from "./second_tab.tsx";
-import {Navbar} from "./navbar.tsx";
+import {ContentPage} from "./third_tab.tsx";
 
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
                         <Route exact path="/" Component={MainPage} />
                         <Route path="/mainPage" Component={MainPage}/>
                         <Route path="/storagePage" Component={StoragePage}/>
+                        <Route path="/contentPage" Component={ContentPage}/>
                     </Routes>
                 </BrowserRouter>
             </>
