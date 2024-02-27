@@ -78,6 +78,16 @@
     justify-content: center;
 }
 
+.textBlock{
+    position: center;
+    margin-left: auto;
+    margin-right: auto;
+    height: 600px;
+    width: 500px;
+    overflow: scroll;
+
+}
+
 
 
 .slider{
@@ -136,4 +146,17 @@
     font-weight: bold;
     color: white;
 }
+
+.scrollingButton{
+
+}
+
+
+h1, h2, p {
+    font-size: 18px;
+    font-family: cursive;
+    text-align: center;
+}
+
+
 
