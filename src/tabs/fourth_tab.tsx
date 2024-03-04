@@ -22,7 +22,6 @@ export const InfoPage = () => {
 
         <div className="backgroundOfPage">
             <div className="mainBlock">
-                <button onClick={getPosts(apiUrl)}>Axios</button>
             </div>
         </div>
     )
