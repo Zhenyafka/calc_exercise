@@ -6,6 +6,17 @@
     width: 1440px;
     background-image: linear-gradient(#1CDEEA, #000000);
 }
+
+.navbarBlock{
+    position: static;
+    margin-left: auto;
+    margin-right: auto;
+    height: 111px;
+    width: 1440px;
+    background-color: #16d7ea;
+
+}
+
 .mainBlock{
     position: static;
     margin-left: auto;
@@ -17,48 +28,70 @@
 }
 
 .sumBlock{
-    position: fixed;
-    margin-left: 200px;
-    margin-top: 150px;
+    position: relative;
+    left: 200px;
+    top: 150px;
 }
 
 .rateBlock{
-    position: fixed;
+    position: static;
     margin-left: 200px;
     margin-top: 300px;
 }
 
 .termBlock{
-    position: fixed;
-    margin-left: 800px;
-    margin-top: 150px;
+    position: relative;
+    margin-left: 750px;
+    top: -295px;
 }
 
 .dateBlock{
-    position: fixed;
-    margin-left: 800px;
-    margin-top: 300px;
+    position: static;
+    margin-left: 750px;
+    margin-top: -240px;
 }
 
 .selectorBlock{
-    position: fixed;
-    margin-left: 800px;
-    margin-top: 400px;
+    position: relative;
+    margin-left: 750px;
+    margin-top: 60px;
 }
 
 .buttonBlock{
-    position: fixed;
+    position: static;
     margin-left: 450px;
-    margin-top: 600px;
+    margin-top: 200px;
 }
 
 .tableBlock{
-    position: fixed;
-    margin-top: 700px;
+    position: static;
+    margin-top: 650px;
     width: inherit;
 }
+
+.modalBlock{
+    position: static;
+    margin-left: 980px;
+    margin-top: -700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.textBlock{
+    position: center;
+    margin-left: auto;
+    margin-right: auto;
+    height: 600px;
+    width: 500px;
+    overflow: scroll;
+
+}
+
+
+
 .slider{
-    position: fixed;
+    position: static;
     margin-left: -230px;
     margin-top: 50px;
     width: 230px;
@@ -113,5 +146,17 @@
     font-weight: bold;
     color: white;
 }
+
+.scrollingButton{
+
+}
+
+
+h1, h2, p {
+    font-size: 18px;
+    font-family: cursive;
+    text-align: center;
+}
+
 
 

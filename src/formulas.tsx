@@ -26,6 +26,7 @@ export const annuityPayments = (creditAmount, interestRate, numberOfMonth, date)
         } as Row)
     }
 
+
     return result
 }
 
@@ -83,6 +84,13 @@ export const differentialPayments = (creditAmount, interestRate, numberOfMonth, 
 }
 
 
+export interface SelectedFunction {
+    label: string
+    method
+}
 
-
-
+export const listOfSelectedFunction: SelectedFunction[] = [
+    {label: "Annuity Payments", method: annuityPayments},
+    {label: "Simple Payments", method: simplePayments},
+    {label: "Differential Payments", method: differentialPayments}
+]

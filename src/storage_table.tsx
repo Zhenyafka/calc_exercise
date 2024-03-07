@@ -8,15 +8,15 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import {Row} from "./first_tab.tsx";
+import {Row} from "./data_record.tsx";
 
-export interface BasicTableProps {
+
+export interface StorageTableProps {
     rows: Row[]
-    isHiddenTable: boolean
 }
 
 interface Column {
-    id: 'paymentDate' | 'amountOfPayment' | 'mainPart' | 'percentagePart';
+    id: 'amountOfPayment' | 'interestRate' | 'amountOfMonths' | 'currentDate';
     label: string;
     minWidth?: number;
     align?: 'right';
@@ -24,11 +24,12 @@ interface Column {
 }
 
 const columns: Column[] = [
-    {id: 'paymentDate', label: 'Payment Date', minWidth: 170},
     {id: 'amountOfPayment', label: 'Amount of Payment', minWidth: 170},
-    {id: 'mainPart', label: 'Main Part', minWidth: 170},
-    {id: 'percentagePart', label: 'Percentage Part', minWidth: 170},
+    {id: 'interestRate', label: 'Interest Rate', minWidth: 170},
+    {id: 'amountOfMonths', label: 'Amount of Months', minWidth: 170},
+    {id: 'currentDate', label: 'Current Date', minWidth: 170},
 ]
+
 
 const useStyles = makeStyles({
     root: {
@@ -43,16 +44,15 @@ function fixedFormat(num: number) {
     return `${num.toFixed(2)}`;
 }
 
-export const BasicTable: FC<BasicTableProps> = ({rows, isHiddenTable}) => {
+export const StorageTable: FC<StorageTableProps> = ({rows}) => {
     const classes = useStyles();
     return (
-        isHiddenTable ? <div/> :
             <Paper className={classes.root}>
                 <TableContainer className={classes.container}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                             <TableRow>
-                                {columns.map((column) => (
+                                {columns?.map((column) => (
                                     <TableCell
                                         key={column.id}
                                         align={column.align}
@@ -63,22 +63,16 @@ export const BasicTable: FC<BasicTableProps> = ({rows, isHiddenTable}) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.map((row) => (
+                            {rows && rows.map((row) => (
                                 <TableRow
                                     key={row.id}
                                     sx={{'&:last-child td, &:last-child th': {border: 0}}}>
-                                    <TableCell>{row.dateOfPayment.toDateString()}</TableCell>
-                                    <TableCell>{fixedFormat(row.oneTimePayment)}</TableCell>
-                                    <TableCell>{fixedFormat(row.mainOneTimePayment)}</TableCell>
-                                    <TableCell>{fixedFormat(row.percentageOneTimePayment)}</TableCell>
+                                    <TableCell>{fixedFormat(row.creditSum)}</TableCell>
+                                    <TableCell>{row.percent}</TableCell>
+                                    <TableCell>{row.term}</TableCell>
+                                    <TableCell>{row.currentDate.toDateString()}</TableCell>
                                 </TableRow>
                             ))}
-                            <TableRow>
-                                <TableCell>Total </TableCell>
-                                <TableCell>{fixedFormat(rows.reduce((sum, currentRow) => sum + currentRow.oneTimePayment, 0))} </TableCell>
-                                <TableCell>{fixedFormat(rows.reduce((sum, currentRow) => sum + currentRow.mainOneTimePayment, 0))} </TableCell>
-                                <TableCell>{fixedFormat(rows.reduce((sum, currentRow) => sum + currentRow.percentageOneTimePayment, 0))} </TableCell>
-                            </TableRow>
                         </TableBody>
                     </Table>
                 </TableContainer>
