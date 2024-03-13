@@ -5,10 +5,10 @@ import "../Components.css"
 export function Navbar() {
     return (
         <nav className="navbarBlock">
-            <NavLink to="/mainPage">Main Page</NavLink>
-            <NavLink to="/storagePage">Storage Page</NavLink>
-            <NavLink to="/contentPage">Content Page</NavLink>
-            <NavLink to="/infoPage">Information Page</NavLink>
+            <NavLink to="/mainPage" className="pageBlock">Main Page</NavLink>
+            <NavLink to="/storagePage" className="pageBlock">Storage Page</NavLink>
+            <NavLink to="/contentPage" className="pageBlock">Content Page</NavLink>
+            <NavLink to="/infoPage" className="pageBlock">Information Page</NavLink>
         </nav>
     );
 }
