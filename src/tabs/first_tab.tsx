@@ -9,7 +9,7 @@ import {dataRecord} from "../data_record.tsx";
 import {Modal} from "../components/modal_window.tsx";
 
 export const MainPage = () => {
-    const [creditAmount, setCreditAmount] = useState(0.);
+    const [creditAmount, setCreditAmount] = useState(0);
     const [interestRate, setInterestRate] = useState(0);
     const [numberOfMonth, setNumberOfMonth] = useState(0);
     const [isHiddenTable, setIsHiddenTable] = useState(true)
