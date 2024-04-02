@@ -11,19 +11,19 @@ const apiUrl = 'https://jsonplaceholder.typicode.com';
 
 
 export const InfoPage = () => {
-    const [request, setRequest] = useState()
+    const [request, setRequest] = useState("")
 
 
-    const getPosts = async () => {
-
-        try {
-            const response = await axios.get(apiUrl)
-            const message = `Accept request with status = ${response.status} and headers: ${response.headers}`
-            setRequest(message)
-        }
-        catch (error) {
-            console.error(error.toJSON())
-        }
+    const getPosts = () => {
+        axios.get(apiUrl)
+            .then(response => {
+                const message = `Accept request with status = ${response.status} and headers: ${response.headers}`;
+                setRequest(message)
+            })
+            .catch((error) => {
+                const showError = `Error returned with ${error}`
+                setRequest(showError)
+            })
     }
 
     return (
