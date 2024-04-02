@@ -51,6 +51,13 @@
     margin-top: -240px;
 }
 
+.urlBlock{
+    position: relative;
+    left: 200px;
+    width: 805px;
+}
+
+
 .selectorBlock{
     position: relative;
     margin-left: 750px;
@@ -151,6 +158,7 @@
 }
 
 
+
 .paymentsButton{
     height: 80px;
     width: 255px;
@@ -177,6 +185,20 @@
     text-align: center;
     font-size: 24px;
     font-weight: normal;
+    color: white;
+}
+.requestButton{
+    position: static;
+    margin-left: 450px;
+    height: 80px;
+    width: 255px;
+    background-color: #1CDEEA;
+    border: 0;
+    box-shadow: 0px 5px 5px grey;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
     color: white;
 }
 

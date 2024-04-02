@@ -1,21 +1,18 @@
 import { React, useState } from 'react';
 import axios from 'axios';
 import "../Components.css";
-import {Paper} from "@mui/material";
-
-
-
-const apiUrl = 'https://jsonplaceholder.typicode.com';
+import {Paper, TextField} from "@mui/material";
 
 
 
 
 export const InfoPage = () => {
-    const [request, setRequest] = useState("")
+    const [request, setRequest] = useState('');
+    const [url, setUrl] = useState();
 
 
     const getPosts = () => {
-        axios.get(apiUrl)
+        axios.get(url)
             .then(response => {
                 const message = `Accept request with status = ${response.status} and headers: ${response.headers}`;
                 setRequest(message)
@@ -30,10 +27,17 @@ export const InfoPage = () => {
 
         <div className="backgroundOfPage">
             <div className="mainBlock">
-                <Paper className="textBlock" >
-                    {request}
-                </Paper>
-                <button onClick={getPosts}>Axios</button>
+                <div>
+                    <TextField onChange={event => setUrl(event.target.value || "")} value={url}
+                                       label={'Enter your URL'} className="urlBlock"/>
+                </div>
+                <div>
+                    <Paper className="textBlock" >
+                        {request}
+                    </Paper>
+                    <button onClick={getPosts} className="requestButton">Get Info</button>
+                </div>
+
             </div>
         </div>
     )
