@@ -16,6 +16,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.6.7",
+    "cors": "^2.8.5",
     "fs-react": "^0.0.4",
     "react": "^18.2.0",
     "react-datepicker": "^4.25.0",

@@ -1,7 +1,8 @@
 import {React, useState} from 'react';
 import axios from 'axios';
 import "../Components.css";
-import {List, ListItem, ListItemText, TextField} from "@mui/material";
+import {List, ListItem, ListItemText, TextField, Paper} from "@mui/material";
+
 
 export interface Row {
     message: string
@@ -38,9 +39,11 @@ export const InfoPage = () => {
                                label={'Enter your URL'} className="urlBlock"/>
                 </div>
                 <div>
+                    <Paper className="textBlock">
                     <List>
                         {list.map(value => <ListItem><ListItemText>{value.message}</ListItemText></ListItem>)}
-                    </List>
+                    </List >
+                    </Paper>
                     <button onClick={getPosts} className="requestButton">Get Info
                     </button>
                 </div>
