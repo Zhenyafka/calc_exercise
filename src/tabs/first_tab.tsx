@@ -1,6 +1,6 @@
 import {React, useState} from "react";
 import "../Components.css"
-import {FormControl, InputLabel, MenuItem, Select, TextField} from "@mui/material";
+import {FormControl, InputLabel, MenuItem, Select, TextField, Box, Slider} from "@mui/material";
 import {BasicTable} from "../table.tsx";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
@@ -20,6 +20,14 @@ export const MainPage = () => {
 
 
 
+    const marksForTerm = [
+        {value: 0, label: '0',},
+        {value: 3, label: '3',},
+        {value: 6, label: '6',},
+        {value: 9, label: '9',},
+        {value: 12,label: '12',},
+        {value: 24, label: '24',},
+    ];
 
 
     const calculateFormulaAndShowTable = () => {
@@ -47,24 +55,46 @@ export const MainPage = () => {
             <div className="mainBlock">
                 <div className="sumBlock">
                     <TextField onChange={event => setCreditAmount(+event.target.value)} value={creditAmount}
-                               label={'creditAmount'}/>
-                    <input className="slider" type="range" min={0} max={1000000}
+                               label={'Сумма кредита'}/>
+                    <Box sx={{ width: 240 }}>
+                        <Slider
+                            min={0}
+                            max={1000000}
+                            step={1000}
                            onChange={event => setCreditAmount(+event.target.value)} value={creditAmount}/>
+                    </Box>
                 </div>
                 <div className="rateBlock">
                     <TextField onChange={event => setInterestRate(+event.target.value)} value={interestRate}
-                               label={'interestRate'}/>
-                    <input className="slider" type="range" min={1} max={100}
+                               label={'Процентная ставка'}/>
+                    <Box sx={{ width: 240 }}>
+                        <Slider
+                            min={0}
+                            max={100}
+                            step={1}
                            onChange={event => setInterestRate(+event.target.value)} value={interestRate}/>
+                    </Box>
                 </div>
+
+
                 <div className="termBlock">
                     <TextField onChange={event => setNumberOfMonth(+event.target.value)} value={numberOfMonth}
-                               label={'numberOfMonth'}/>
-                    <input className="slider" type="range" min={1} max={1200}
-                           onChange={event => setNumberOfMonth(+event.target.value)} value={numberOfMonth}/>
+                               label={'Срок кредита'}/>
+                    <Box sx={{ width: 240 }}>
+                        <Slider
+                            min={0}
+                            max={24}
+                            step={null}
+                            marks={marksForTerm}
+                            onChange={event => setNumberOfMonth(+event.target.value)} value={numberOfMonth}
+                        />
+                    </Box>
                 </div>
+
+
+
                 <div className="dateBlock">
-                    <DatePicker selected={date} onChange={(date) => setDate(date)}/>
+                    <DatePicker label={'qwe'} selected={date} onChange={(date) => setDate(date)}/>
                 </div>
                 <div className="selectorBlock">
                     <FormControl variant="standard" sx={{m: 1, minWidth: 150}}>
