@@ -1,6 +1,6 @@
 import {React, useState} from "react";
 import "../Components.css"
-import {FormControl, InputLabel, MenuItem, Select, TextField, Box, Slider} from "@mui/material";
+import {FormControl, InputLabel, MenuItem, Select, TextField, InputAdornment, Box, Slider} from "@mui/material";
 import {BasicTable} from "../table.tsx";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
@@ -54,20 +54,27 @@ export const MainPage = () => {
         <div className="backgroundOfPage" onChange={x}>
             <div className="mainBlock">
                 <div className="sumBlock">
-                    <TextField onChange={event => setCreditAmount(+event.target.value)} value={creditAmount}
-                               label={'Сумма кредита'}/>
-                    <Box sx={{ width: 240 }}>
+                    <TextField onChange={event => setCreditAmount(+event.target.value)} value={creditAmount.toFixed(2)}
+                               label={'Сумма кредита'}
+                               InputProps={{
+                                   endAdornment: <InputAdornment position="end">₽</InputAdornment>,
+                               }}/>
+                    <Box sx={{ width: 260 }}>
                         <Slider
                             min={0}
                             max={1000000}
                             step={1000}
-                           onChange={event => setCreditAmount(+event.target.value)} value={creditAmount}/>
+                           onChange={event => setCreditAmount(+event.target.value)} value={creditAmount}
+                        />
                     </Box>
                 </div>
                 <div className="rateBlock">
                     <TextField onChange={event => setInterestRate(+event.target.value)} value={interestRate}
-                               label={'Процентная ставка'}/>
-                    <Box sx={{ width: 240 }}>
+                               label={'Процентная ставка'}
+                               InputProps={{
+                                   endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                               }}/>
+                    <Box sx={{ width: 260 }}>
                         <Slider
                             min={0}
                             max={100}
@@ -78,8 +85,7 @@ export const MainPage = () => {
 
 
                 <div className="termBlock">
-                    <TextField onChange={event => setNumberOfMonth(+event.target.value)} value={numberOfMonth}
-                               label={'Срок кредита'}/>
+                    <TextField value={numberOfMonth} label={'Срок кредита'}/>
                     <Box sx={{ width: 240 }}>
                         <Slider
                             min={0}
@@ -98,7 +104,7 @@ export const MainPage = () => {
                 </div>
                 <div className="selectorBlock">
                     <FormControl variant="standard" sx={{m: 1, minWidth: 150}}>
-                        <InputLabel id="demo-simple-select-standard-label">Type of Calculation</InputLabel>
+                        <InputLabel id="demo-simple-select-standard-label">Порядок погашения</InputLabel>
                         <Select
                             value={selectedFunctionForCreditCalculation}
                             onChange={(e) => {
